@@ -34,7 +34,7 @@ export default function ContactList() {
 
   return (
     <Card>
-      {contacts.length === 0 && <p>Nenhum contato ainda. Adicione o primeiro ✨</p>}
+      {contacts.length === 0 && <p>Nenhum contato adicionado. Adicione o primeiro!</p>}
 
       {contacts.map((c) => (
         <Row key={c.id} style={{ marginBottom: 10 }}>

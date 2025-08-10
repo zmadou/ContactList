@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+Lista de Contatos — React + Redux Toolkit + Styled Components
+Aplicação simples para gerenciar uma lista de contatos com nome completo, e‑mail e telefone.
+Permite adicionar, editar e remover contatos.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tecnologias
+React 18 + TypeScript
 
-## Available Scripts
+Redux Toolkit (estado global)
 
-In the project directory, you can run:
+Styled Components (estilização)
 
-### `npm start`
+Jest + Testing Library (tests)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Requisitos
+Node.js LTS (>= 18) e npm
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Como Rodar:
+# instalar dependências
+npm install
 
-### `npm test`
+# ambiente de desenvolvimento
+npm start
+# http://localhost:3000
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Scripts disponíveis
+npm start — inicia em modo desenvolvimento
 
-### `npm run build`
+npm test — executa os testes em watch mode
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm run build — gera build de produção
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm run lint — (se configurado) verifica o lint
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm run format — (se configurado) formata o código
 
-### `npm run eject`
+Estrutura principal
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+src/
+  app/
+    store.ts           # configuração do Redux
+  features/
+    contacts/
+      contactsSlice.ts # reducers e actions (add, update, remove)
+  components/
+    ContactForm.tsx    # formulário de adição
+    ContactList.tsx    # listagem + edição/remoção
+  styles.ts            # estilos globais e componentes base
+  App.tsx              # montagem da UI
+  index.tsx            # bootstrap do React
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Funcionalidades
+Adicionar contato com validação básica de e‑mail
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Editar contato inline
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Remover contato da lista
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

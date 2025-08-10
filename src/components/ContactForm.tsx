@@ -1,7 +1,8 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, ChangeEvent, useState } from 'react';
 import { useAppDispatch } from '../hooks';
 import { addContact } from '../features/contacts/contactsSlice';
 import { Card, Row, Input, Button } from '../styles';
+import InputMask from 'react-input-mask';
 
 export default function ContactForm() {
   const dispatch = useAppDispatch();
@@ -22,16 +23,39 @@ export default function ContactForm() {
       return;
     }
 
+    // Envia exatamente como está no input (com máscara)
     dispatch(addContact({ fullName, email, phone }));
-    setFullName(''); setEmail(''); setPhone('');
+    setFullName('');
+    setEmail('');
+    setPhone('');
   }
 
   return (
     <Card as="form" onSubmit={handleSubmit}>
       <Row>
-        <Input placeholder="Nome completo" value={fullName} onChange={e => setFullName(e.target.value)} />
-        <Input placeholder="E-mail" type="email" value={email} onChange={e => setEmail(e.target.value)} />
-        <Input placeholder="Telefone" value={phone} onChange={e => setPhone(e.target.value)} />
+        <Input
+          placeholder="Nome completo"
+          value={fullName}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setFullName(e.target.value)}
+        />
+
+        <Input
+          placeholder="E-mail"
+          type="email"
+          value={email}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+        />
+
+        {/* Telefone com máscara */}
+        <Input
+          as={InputMask}
+          mask="(99) 99999-9999"
+          maskChar=""
+          placeholder="Telefone"
+          value={phone}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+        />
+
         <Button type="submit">Adicionar</Button>
       </Row>
     </Card>

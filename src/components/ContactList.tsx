@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { removeContact, updateContact, Contact } from '../features/contacts/contactsSlice';
 import { Card, Row, Input, Button } from '../styles';
+import InputMask from 'react-input-mask';
 
 export default function ContactList() {
-  const contacts = useAppSelector(s => s.contacts.items);
+  const contacts = useAppSelector((s) => s.contacts.items);
   const dispatch = useAppDispatch();
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<Omit<Contact, 'id'>>({
-    fullName: '', email: '', phone: ''
+    fullName: '',
+    email: '',
+    phone: ''
   });
 
   function startEdit(c: Contact) {
@@ -33,26 +36,53 @@ export default function ContactList() {
     <Card>
       {contacts.length === 0 && <p>Nenhum contato ainda. Adicione o primeiro ✨</p>}
 
-      {contacts.map(c => (
+      {contacts.map((c) => (
         <Row key={c.id} style={{ marginBottom: 10 }}>
           {editingId === c.id ? (
             <>
-              <Input value={draft.fullName} onChange={(e) => setDraft(d => ({ ...d, fullName: e.target.value }))} />
-              <Input type="email" value={draft.email} onChange={(e) => setDraft(d => ({ ...d, email: e.target.value }))} />
-              <Input value={draft.phone} onChange={(e) => setDraft(d => ({ ...d, phone: e.target.value }))} />
+              <Input
+                value={draft.fullName}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setDraft((d) => ({ ...d, fullName: e.target.value }))
+                }
+              />
+              <Input
+                type="email"
+                value={draft.email}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setDraft((d) => ({ ...d, email: e.target.value }))
+                }
+              />
+              <Input
+                as={InputMask}
+                mask="(99) 99999-9999"
+                maskChar=""
+                value={draft.phone}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setDraft((d) => ({ ...d, phone: e.target.value }))
+                }
+              />
               <div style={{ display: 'flex', gap: 8, justifySelf: 'end' }}>
                 <Button onClick={saveEdit}>Salvar</Button>
-                <Button variant="ghost" onClick={cancelEdit} type="button">Cancelar</Button>
+                <Button variant="ghost" onClick={cancelEdit} type="button">
+                  Cancelar
+                </Button>
               </div>
             </>
           ) : (
             <>
-              <div><strong>{c.fullName}</strong></div>
+              <div>
+                <strong>{c.fullName}</strong>
+              </div>
               <div>{c.email}</div>
               <div>{c.phone}</div>
               <div style={{ display: 'flex', gap: 8, justifySelf: 'end' }}>
-                <Button onClick={() => startEdit(c)} type="button">Editar</Button>
-                <Button variant="ghost" onClick={() => dispatch(removeContact(c.id))} type="button">Remover</Button>
+                <Button onClick={() => startEdit(c)} type="button">
+                  Editar
+                </Button>
+                <Button variant="ghost" onClick={() => dispatch(removeContact(c.id))} type="button">
+                  Remover
+                </Button>
               </div>
             </>
           )}

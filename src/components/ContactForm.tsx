@@ -23,7 +23,6 @@ export default function ContactForm() {
       return;
     }
 
-    // Envia exatamente como está no input (com máscara)
     dispatch(addContact({ fullName, email, phone }));
     setFullName('');
     setEmail('');
@@ -46,7 +45,6 @@ export default function ContactForm() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
         />
 
-        {/* Telefone com máscara */}
         <Input
           as={InputMask}
           mask="(99) 99999-9999"

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import tarefasReducer from "../features/tarefas/tarefasSlice";
+
 
 const store = configureStore({
   reducer: {
-    // tarefas: tarefasReducer,
+    // foi osso, sofri d+ com esse projeto...
   },
 });
 
